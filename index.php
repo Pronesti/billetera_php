@@ -33,12 +33,18 @@ function sacarPlata($billete, $cantidad){
 }
 
 function mostrarPlata(){
-   return($this->lista);
+    $nuevaLista=array();
+    foreach($this->lista as $k => $v){
+        if ($v != 0){
+        $nuevaLista[$k] = $v;
+    }
+    }
+   return $nuevaLista;
 }
 
 function calcularTotal(){
     $total=0;
-    foreach($this->lista as $k => $v){
+    foreach($this->lista as $k => $v){    
         $total = $total + $k * $v;
     }
     return $total;
@@ -47,21 +53,33 @@ function calcularTotal(){
 function agregarBilletesAleatorios(){
     $nuevaLista = array();
     foreach($this->billetesExistentes as $k => $v){
-        $nuevaLista[$v]= random_int(0,100); 
+        $this->lista[$v]= $this->lista[$v] + random_int(0,100); 
     }
-    print_r($nuevaLista);
 }
 
 }
 
-$miBilletera = new Billetera();
-/* $miBilletera->agregarPlata(5,2);
-$miBilletera->agregarPlata(10,5);
-$miBilletera->agregarPlata(20,3);
-$miBilletera->agregarPlata(50,2); */
+function crearMuchasBilleterasConBilletesAleatorios($n){
+    $i=0;
+    while($i<$n){
+        $billeteras[$i] = new Billetera();
+        $billeteras[$i]->agregarBilletesAleatorios();
+        $i +=1;
+    }
+    return $billeteras;
+}
+
+//$miBilletera = new Billetera();
+//$miBilletera->agregarPlata(5,2);
+//$miBilletera->agregarPlata(10,5);
+//$miBilletera->agregarPlata(20,3);
+//$miBilletera->agregarPlata(50,2);
 //$miBilletera->agregarPlata(100,2);
 //print_r($miBilletera->mostrarPlata());
 //print_r($miBilletera->calcularTotal());
 //$miBilletera->sacarPlata(10,0);
+//print_r($miBilletera->mostrarPlata());
+//$miBilletera->agregarBilletesAleatorios();
+//print_r($miBilletera->mostrarPlata());
 
-$miBilletera->agregarBilletesAleatorios();
+print_r(crearMuchasBilleterasConBilletesAleatorios(16));
