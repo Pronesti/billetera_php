@@ -44,14 +44,24 @@ function calcularTotal(){
     return $total;
 }
 
+function agregarBilletesAleatorios(){
+    $nuevaLista = array();
+    foreach($this->billetesExistentes as $k => $v){
+        $nuevaLista[$v]= random_int(0,100); 
+    }
+    print_r($nuevaLista);
+}
+
 }
 
 $miBilletera = new Billetera();
-$miBilletera->agregarPlata(5,2);
+/* $miBilletera->agregarPlata(5,2);
 $miBilletera->agregarPlata(10,5);
 $miBilletera->agregarPlata(20,3);
-$miBilletera->agregarPlata(50,2);
+$miBilletera->agregarPlata(50,2); */
 //$miBilletera->agregarPlata(100,2);
-print_r($miBilletera->mostrarPlata());
+//print_r($miBilletera->mostrarPlata());
 //print_r($miBilletera->calcularTotal());
-$miBilletera->sacarPlata(10,0);
+//$miBilletera->sacarPlata(10,0);
+
+$miBilletera->agregarBilletesAleatorios();
